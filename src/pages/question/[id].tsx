@@ -1,5 +1,6 @@
 import Head from "next/head";
 import QuestionInput from "@/components/QuestionComponents/QuestionInput";
+import QuestionRadio from "@/components/QuestionComponents/QuestionRadio";
 
 export default function Home() {
   return (
@@ -13,6 +14,19 @@ export default function Home() {
       <QuestionInput
         fe_id={"123"}
         props={{ title: "test", placeholder: "test" }}
+      />
+      <QuestionRadio
+        fe_id={"123"}
+        props={{
+          title: "test",
+          options: [
+            { label: "test1", value: "test1" },
+            { label: "test2", value: "test2" },
+            { label: "test3", value: "test3" },
+          ],
+          value: "test",
+          vertical: true,
+        }}
       />
     </>
   );
