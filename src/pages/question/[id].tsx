@@ -2,7 +2,13 @@ import Head from "next/head";
 import QuestionInput from "@/components/QuestionComponents/QuestionInput";
 import QuestionRadio from "@/components/QuestionComponents/QuestionRadio";
 
-export default function Home() {
+type PropsType = {
+  id: string;
+};
+
+export default function Home(props: PropsType) {
+  const { id } = props;
+
   return (
     <>
       <Head>
@@ -11,6 +17,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {id}
       <QuestionInput
         fe_id={"123"}
         props={{ title: "test", placeholder: "test" }}
@@ -30,4 +37,14 @@ export default function Home() {
       />
     </>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  const { id } = context.params;
+
+  return {
+    props: {
+      id,
+    },
+  };
 }
