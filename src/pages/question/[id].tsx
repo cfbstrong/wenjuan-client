@@ -1,4 +1,5 @@
 import Head from "next/head";
+import styles from "@/styles/Question.module.scss";
 import QuestionInput from "@/components/QuestionComponents/QuestionInput";
 import QuestionRadio from "@/components/QuestionComponents/QuestionRadio";
 
@@ -6,7 +7,7 @@ type PropsType = {
   id: string;
 };
 
-export default function Home(props: PropsType) {
+export default function Question(props: PropsType) {
   const { id } = props;
 
   return (
@@ -17,24 +18,35 @@ export default function Home(props: PropsType) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {id}
-      <QuestionInput
-        fe_id={"123"}
-        props={{ title: "test", placeholder: "test" }}
-      />
-      <QuestionRadio
-        fe_id={"123"}
-        props={{
-          title: "test",
-          options: [
-            { label: "test1", value: "test1" },
-            { label: "test2", value: "test2" },
-            { label: "test3", value: "test3" },
-          ],
-          value: "test",
-          vertical: true,
-        }}
-      />
+      <form action="">
+        {/* 隐藏域提交id */}
+        <input type="hidden" name="questionId" value={id} />
+        <div className={styles.componentWrapper}>
+          <QuestionInput
+            fe_id={"123"}
+            props={{ title: "test", placeholder: "test" }}
+          />
+        </div>
+        <div className={styles.componentWrapper}>
+          <QuestionRadio
+            fe_id={"123"}
+            props={{
+              title: "test",
+              options: [
+                { label: "test1", value: "test1" },
+                { label: "test2", value: "test2" },
+                { label: "test3", value: "test3" },
+              ],
+              value: "test",
+              vertical: true,
+            }}
+          />
+        </div>
+        <div className={styles.submitBtnContainer}>
+          {/* <input type="submit" value="提交" /> */}
+          <button type="submit">提交</button>
+        </div>
+      </form>
     </>
   );
 }
