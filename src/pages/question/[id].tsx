@@ -18,7 +18,7 @@ export default function Question(props: PropsType) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <form action="">
+      <form method="post" action="/api/answer">
         {/* 隐藏域提交id */}
         <input type="hidden" name="questionId" value={id} />
         <div className={styles.componentWrapper}>
@@ -29,12 +29,12 @@ export default function Question(props: PropsType) {
         </div>
         <div className={styles.componentWrapper}>
           <QuestionRadio
-            fe_id={"123"}
+            fe_id={"1234"}
             props={{
               title: "test",
               options: [
                 { label: "test1", value: "test1" },
-                { label: "test2", value: "test2" },
+                { label: "test2", value: "test21" },
                 { label: "test3", value: "test3" },
               ],
               value: "test",
