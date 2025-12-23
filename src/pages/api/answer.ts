@@ -25,6 +25,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).json({ errno: -1, msg: "method error" });
   }
   const answerInfo = getAnswerInfo(req.body);
-  console.log(answerInfo);
-  res.status(200).json({ name: "John Doe" });
+  //   console.log(answerInfo);
+
+  try {
+    //如果提交成功了
+    // res.redirect("/success");
+
+    //如果提交失败了
+    res.redirect("/fail");
+  } catch (err) {}
+
+  //   res.status(200).json({ errno: 0 });
 }
