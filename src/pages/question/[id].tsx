@@ -1,15 +1,56 @@
 import Head from "next/head";
 import styles from "@/styles/Question.module.scss";
+import { getQuestionById } from "@/services/question";
 import PageWrapper from "@/components/PageWrapper";
 import QuestionInput from "@/components/QuestionComponents/QuestionInput";
 import QuestionRadio from "@/components/QuestionComponents/QuestionRadio";
 
 type PropsType = {
-  id: string;
+  errno: number;
+  data?: {
+    id: string;
+    title: string;
+    description?: string;
+    js?: string;
+    css?: string;
+    isPublished: boolean;
+    isDeleted: boolean;
+    //组件列表
+    componentList: Array<any>;
+  };
+  msg?: string;
 };
 
 export default function Question(props: PropsType) {
-  const { id } = props;
+  const { errno, data, msg } = props;
+  const { id, title = "", isDeleted, isPublished, description } = data || {};
+
+  if (errno !== 0) {
+    return (
+      <PageWrapper title="错误">
+        <h1>错误</h1>
+        <p>{msg}</p>
+      </PageWrapper>
+    );
+  }
+
+  if (isDeleted) {
+    return (
+      <PageWrapper title={title} desc={description}>
+        <h1>{title}</h1>
+        <p>该问卷已被删除</p>
+      </PageWrapper>
+    );
+  }
+
+  if (!isPublished) {
+    return (
+      <PageWrapper title={title} desc={description}>
+        <h1>{title}</h1>
+        <p>该问卷尚未发布</p>
+      </PageWrapper>
+    );
+  }
 
   return (
     <>
@@ -19,7 +60,7 @@ export default function Question(props: PropsType) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head> */}
-      <PageWrapper title="Question" desc="Question page">
+      <PageWrapper title={title} desc={description}>
         <form method="post" action="/api/answer">
           {/* 隐藏域提交id */}
           <input type="hidden" name="questionId" value={id} />
@@ -57,9 +98,9 @@ export default function Question(props: PropsType) {
 export async function getServerSideProps(context: any) {
   const { id } = context.params;
 
+  const data = await getQuestionById(id);
+
   return {
-    props: {
-      id,
-    },
+    props: data,
   };
 }
