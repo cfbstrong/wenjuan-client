@@ -2,8 +2,9 @@ import Head from "next/head";
 import styles from "@/styles/Question.module.scss";
 import { getQuestionById } from "@/services/question";
 import PageWrapper from "@/components/PageWrapper";
-import QuestionInput from "@/components/QuestionComponents/QuestionInput";
-import QuestionRadio from "@/components/QuestionComponents/QuestionRadio";
+import { getComponent } from "@/components/QuestionComponents";
+// import QuestionInput from "@/components/QuestionComponents/QuestionInput";
+// import QuestionRadio from "@/components/QuestionComponents/QuestionRadio";
 
 type PropsType = {
   errno: number;
@@ -23,7 +24,14 @@ type PropsType = {
 
 export default function Question(props: PropsType) {
   const { errno, data, msg } = props;
-  const { id, title = "", isDeleted, isPublished, description } = data || {};
+  const {
+    id,
+    title = "",
+    isDeleted,
+    isPublished,
+    description,
+    componentList,
+  } = data || {};
 
   if (errno !== 0) {
     return (
@@ -64,13 +72,16 @@ export default function Question(props: PropsType) {
         <form method="post" action="/api/answer">
           {/* 隐藏域提交id */}
           <input type="hidden" name="questionId" value={id} />
-          <div className={styles.componentWrapper}>
-            <QuestionInput
-              fe_id={"123"}
-              props={{ title: "test", placeholder: "test" }}
-            />
-          </div>
-          <div className={styles.componentWrapper}>
+
+          {componentList?.map((c) => {
+            const { fe_id } = c;
+            return (
+              <div className={styles.componentWrapper} key={fe_id}>
+                {getComponent(c)}
+              </div>
+            );
+          })}
+          {/* <div className={styles.componentWrapper}>
             <QuestionRadio
               fe_id={"1234"}
               props={{
@@ -84,7 +95,8 @@ export default function Question(props: PropsType) {
                 vertical: true,
               }}
             />
-          </div>
+          </div> */}
+
           <div className={styles.submitBtnContainer}>
             {/* <input type="submit" value="提交" /> */}
             <button type="submit">提交</button>
