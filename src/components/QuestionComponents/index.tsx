@@ -1,5 +1,6 @@
 import QuestionInput from "./QuestionInput";
 import QuestionRadio from "./QuestionRadio";
+import QuestionTitle from "./QuestionTitle";
 
 type ComponentInfo = {
   fe_id: string;
@@ -23,5 +24,9 @@ export function getComponent(component: ComponentInfo) {
 
   if (type == "questionInput") {
     return <QuestionInput fe_id={fe_id} props={props} />;
+  }
+
+  if (type == "questionTitle") {
+    return <QuestionTitle {...props} />;
   }
 }
