@@ -3,6 +3,7 @@ import QuestionRadio from "./QuestionRadio";
 import QuestionTitle from "./QuestionTitle";
 import QuestionParagraph from "./QuestionParagraph";
 import QuestionInfo from "./QuestionInfo";
+import QuestionTextarea from "./QuestionTextarea";
 
 type ComponentInfo = {
   fe_id: string;
@@ -38,5 +39,9 @@ export function getComponent(component: ComponentInfo) {
 
   if (type == "questionInfo") {
     return <QuestionInfo {...props} />;
+  }
+
+  if (type == "questionTextarea") {
+    return <QuestionTextarea fe_id={fe_id} props={props}></QuestionTextarea>;
   }
 }
