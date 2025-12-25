@@ -4,6 +4,7 @@ import QuestionTitle from "./QuestionTitle";
 import QuestionParagraph from "./QuestionParagraph";
 import QuestionInfo from "./QuestionInfo";
 import QuestionTextarea from "./QuestionTextarea";
+import QuestionCheckbox from "./QuestionCheckbox";
 
 type ComponentInfo = {
   fe_id: string;
@@ -43,5 +44,9 @@ export function getComponent(component: ComponentInfo) {
 
   if (type == "questionTextarea") {
     return <QuestionTextarea fe_id={fe_id} props={props}></QuestionTextarea>;
+  }
+
+  if (type == "questionCheckbox") {
+    return <QuestionCheckbox fe_id={fe_id} props={props}></QuestionCheckbox>;
   }
 }
