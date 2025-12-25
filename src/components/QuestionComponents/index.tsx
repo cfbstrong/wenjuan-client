@@ -2,6 +2,7 @@ import QuestionInput from "./QuestionInput";
 import QuestionRadio from "./QuestionRadio";
 import QuestionTitle from "./QuestionTitle";
 import QuestionParagraph from "./QuestionParagraph";
+import QuestionInfo from "./QuestionInfo";
 
 type ComponentInfo = {
   fe_id: string;
@@ -33,5 +34,9 @@ export function getComponent(component: ComponentInfo) {
 
   if (type == "questionPragraph") {
     return <QuestionParagraph {...props} />;
+  }
+
+  if (type == "questionInfo") {
+    return <QuestionInfo {...props} />;
   }
 }
