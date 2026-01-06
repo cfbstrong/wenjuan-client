@@ -9,7 +9,7 @@ import { getComponent } from "@/components/QuestionComponents";
 type PropsType = {
   errno: number;
   data?: {
-    id: string;
+    _id: string;
     title: string;
     description?: string;
     js?: string;
@@ -25,7 +25,7 @@ type PropsType = {
 export default function Question(props: PropsType) {
   const { errno, data, msg } = props;
   const {
-    id,
+    _id: id,
     title = "",
     isDeleted,
     isPublished,
