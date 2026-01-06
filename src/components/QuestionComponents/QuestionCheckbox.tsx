@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import styles from "./QuestionCheckbox.module.scss";
 
-//important: 提交给服务端的数据格式为：{fe_id:xxx, selectedItems: "a.b.c"}
+//important: 提交给服务端的数据格式为：{fe_id:xxx, selectedItems: "a,b,c"}
 type ListItemType = {
   value: string;
   label: string;
